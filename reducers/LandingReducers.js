@@ -1,17 +1,41 @@
 const INITIAL_STATE = {
-  finalResult: 0,
+  splBut: false,
+  evalExpression: [],
+  initialize: true,
 };
 
-export default function landingReducers(state = INITIAL_STATE, action) {
-  console.log(action, 'action in reducer');
+export default function LandingReducers(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case 'click':
-      return {
-        finalResult: action.payload,
-      };
-    default:
+    case 'change spl button':
       return {
         ...state,
+        splBut: !action.payload,
       };
+    case 'evaluating Expression':
+      return {
+        ...state,
+        evalExpression: action.payload.finalArray,
+        initialize: false,
+      };
+    case 'calculation action':
+      return {
+        ...state,
+        evalExpression: action.payload,
+        initialize: false,
+      };
+    case 'clear all state':
+      return {
+        evalExpression: [],
+        initialize: true,
+      };
+    case 'scientific calculation':
+      return {
+        ...state,
+        evalExpression: action.payload,
+        initialize: false,
+      };
+
+    default:
+      return state;
   }
 }

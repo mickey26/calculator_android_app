@@ -1,4 +1,4 @@
 import {combineReducers} from 'redux';
-import landingReducers from './LandingReducers';
+import LandingReducers from './LandingReducers';
 
-export default combineReducers({landingReducers});
+export default combineReducers({LandingReducers});
