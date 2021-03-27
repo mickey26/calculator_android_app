@@ -4,34 +4,6 @@ export const LandingAction = data => {
   };
 };
 
-export const scientificButtonAction = (tempArr, button) => {
-  return dispatch => {
-    let p = button.toString();
-    let pArray = [];
-    let sample = tempArr[0];
-    switch (p) {
-      case 'Sign': {
-        pArray.push(-sample);
-        break;
-      }
-      case 'Square': {
-        pArray.push(sample * sample);
-        break;
-      }
-      case 'SQR Root': {
-        if (sample >= 0) {
-          pArray.push(Math.sqrt(sample));
-        }
-        break;
-      }
-      default:
-        pArray.push(sample);
-    }
-
-    dispatch({type: 'scientific calculation', payload: pArray});
-  };
-};
-
 export const clearFunction = arr => {
   return dispatch => {
     arr = [];

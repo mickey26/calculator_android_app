@@ -28,12 +28,7 @@ export default function LandingReducers(state = INITIAL_STATE, action) {
         evalExpression: [],
         initialize: true,
       };
-    case 'scientific calculation':
-      return {
-        ...state,
-        evalExpression: action.payload,
-        initialize: false,
-      };
+    
 
     default:
       return state;

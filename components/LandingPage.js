@@ -12,7 +12,6 @@ import {
 import {connect} from 'react-redux';
 
 function LandingPage(props) {
-  const [result, setResult] = useState(0);
   const [tempArr, setTempArr] = useState([]);
   const numberKeys = [
     1,
@@ -67,18 +66,6 @@ function LandingPage(props) {
   return (
     <View>
       <Header />
-      <View
-        style={{
-          height: 70,
-          borderColor: 'black',
-          borderWidth: 2,
-          margin: 2,
-          padding: 2,
-        }}>
-        <Text style={{fontSize: 50, alignItems: 'flex-end'}}>
-          {props.finalResult}
-        </Text>
-      </View>
       <View
         style={{
           height: 70,
