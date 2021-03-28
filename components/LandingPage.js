@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, SafeAreaView, Button} from 'react-native';
-import Header from './Header';
+import {View, Text} from 'react-native';
 import KeyBoxes from './KeyBoxes';
 import {
-  LandingAction,
   expressionAction,
   calculationAction,
   clearFunction,
-  scientificButtonAction,
+  nightModeAction,
 } from '../actions/LandingActions';
 import {connect} from 'react-redux';
 
@@ -32,11 +30,13 @@ function LandingPage(props) {
     '/',
   ];
 
+  const handleNightMode = data => {
+    props.nightModeAction(data);
+  };
   const clrExp = data => {
-    props.clearFunction(props.evalExpression);
+    props.clearFunction(props.nightMode);
   };
   const evalExp = data => {
-    console.log(typeof data, 'data in eval');
     if (!(props.evalExpression.length === 0 && typeof data !== 'number')) {
       if (
         !(
@@ -62,24 +62,52 @@ function LandingPage(props) {
     }
   };
 
-  console.log(props, 'prop of redux');
   return (
-    <View>
-      <Header />
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: props.nightMode ? '#3F4646' : '#ECF0F1',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+      }}>
+      <View style={{width: '90%', borderColor: '#A5ADAE', width: '90%'}}>
+        <Text
+          style={{
+            fontSize: 30,
+            color: '#A5ADAE',
+            padding: 10,
+            alignSelf: 'flex-end',
+            elevation: 2,
+            borderWidth: 0.5,
+            marginBottom: 450,
+          }}
+          onPress={() => handleNightMode(props.nightMode)}>
+          {props.nightMode ? 'Day Mode' : 'Night Mode'}
+        </Text>
+      </View>
       <View
         style={{
           height: 70,
-          borderColor: 'black',
-          borderWidth: 2,
+          borderColor: '#A5ADAE',
+          backgroundColor: props.nightMode ? '#3F4646' : '#ECF0F1',
+          borderBottomWidth: 1,
           margin: 2,
           padding: 2,
+          width: '90%',
+          padding: 10,
+          marginLeft: 0,
+          marginRight: 0,
+          marginBottom: 20,
+          alignItems: 'flex-end',
         }}>
-        <Text style={{fontSize: 50, alignItems: 'flex-end'}}>
+        <Text style={{fontSize: 50, color: '#ED3A52'}}>
           {props.initialize
             ? 0
             : props.evalExpression &&
               props.evalExpression.map((data, index) => (
-                <Text key="index">{data}</Text>
+                <Text style={{color: '#ED3A52'}} key={index}>
+                  {data}
+                </Text>
               ))}
         </Text>
       </View>
@@ -90,6 +118,7 @@ function LandingPage(props) {
           justifyContent: 'center',
           marginTop: 10,
           bottom: 0,
+          marginBottom: 20,
         }}>
         {numberKeys.map(value => (
           <Text
@@ -105,18 +134,17 @@ function LandingPage(props) {
 }
 
 const mapStateToProps = ({LandingReducers}) => {
-  const {splBut, evalExpression, initialize} = LandingReducers;
+  const {evalExpression, initialize, nightMode} = LandingReducers;
   return {
-    splBut,
     evalExpression,
     initialize,
+    nightMode,
   };
 };
 
 export default connect(mapStateToProps, {
-  LandingAction,
   expressionAction,
   calculationAction,
   clearFunction,
-  scientificButtonAction,
+  nightModeAction,
 })(LandingPage);

@@ -1,13 +1,12 @@
-export const LandingAction = data => {
+export const clearFunction = data => {
   return dispatch => {
-    dispatch({type: 'change spl button', payload: data});
+    dispatch({type: 'clear all state', payload: data});
   };
 };
 
-export const clearFunction = arr => {
+export const nightModeAction = data => {
   return dispatch => {
-    arr = [];
-    dispatch({type: 'clear all state', payload: arr});
+    dispatch({type: 'Handle Mode', payload: data});
   };
 };
 

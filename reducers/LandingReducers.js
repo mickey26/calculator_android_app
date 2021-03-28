@@ -1,15 +1,15 @@
 const INITIAL_STATE = {
-  splBut: false,
   evalExpression: [],
   initialize: true,
+  nightMode: true,
 };
 
 export default function LandingReducers(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case 'change spl button':
+    case 'Handle Mode':
       return {
         ...state,
-        splBut: !action.payload,
+        nightMode: !action.payload,
       };
     case 'evaluating Expression':
       return {
@@ -27,9 +27,8 @@ export default function LandingReducers(state = INITIAL_STATE, action) {
       return {
         evalExpression: [],
         initialize: true,
+        nightMode: action.payload,
       };
-    
-
     default:
       return state;
   }
